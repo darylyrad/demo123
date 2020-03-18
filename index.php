@@ -2,7 +2,8 @@
 	<input type="text" id="name_s" >	
 	<button  onclick="EnterName()">Add Names</button>
 	<button  onclick="startRaffle()">Start Raffle</button>
-	<h1 id="present"></h1>
+	<p>random name: <h1 id="present"></h1></p>
+	<p >List of Name: <h3 id="list_name"></h3></p>
 
 <script type="text/javascript">
 	const arrName = [];
@@ -10,7 +11,6 @@
 		name_s = document.getElementById('name_s').value;
 		if(name_s != ""){
 			checkValue(name_s);
-			console.log(arrName);
 		}else{
 			alert("Please Enter name")
 		}
@@ -22,6 +22,7 @@
 	        alert("Value exists!")
 	    } else{
 			arrName.push(name_s);
+			document.getElementById('list_name').innerHTML += name_s+"<br>";
 	    }
 	}
 
@@ -40,12 +41,20 @@
             return Math.random() * (mx - mn) + mn;  
     }  
 
+    function printedName(){
+    	document.getElementById('list_name').innerHTML = "";
+    	for (let i = 0; i < arrName.length; i++) {
+		  document.getElementById('list_name').innerHTML += arrName[i] +"<br>";
+		}
+    }
+
     function removeValue(val){
 		var index = arrName.indexOf(val);
 	 
 	    if (index > -1) {
 	       arrName.splice(index, 1);
 	       document.getElementById('present').innerHTML = val;
+	       printedName();
 	    }
 	    console.log(arrName);
     }
